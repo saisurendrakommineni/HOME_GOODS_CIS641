@@ -19,6 +19,7 @@ function App() {
 
     const addCategory = (newCategory) => {
         setCategories(prevCategories => [...prevCategories, newCategory]);
+        
     };
 
     const handleDelete=(deleteitem)=>{
@@ -38,6 +39,10 @@ function App() {
       {
         case 'addItem':
           return[...types,action.payload]
+        case 'editItem':
+          return types.map(item => 
+            item.id === action.payload.id ? {  ...action.payload } : item
+          );
           default:
             return types
       }
@@ -57,9 +62,16 @@ function App() {
           <Route path="/item-types/:category" element={<Itemtypes items={items}/>}></Route> 
           {/* afte adding additemtypes.js items={items} before it was items={item_types} */}
           {/* above "category" name must be use in use params ItemTypes.js file */}
-          <Route path="/add-item-type" element={<Additemtype dispatch={dispatch}/>}></Route> 
+
+          {/* <Route path="/add-item-type" element={<Additemtype dispatch={dispatch}/>}></Route>  */}
+
+
+          <Route path="/add-item-type" element={<Additemtype addItem={(newItem) => dispatch({ type: 'addItem', payload: newItem })} />} />
+
+          {/* we can use above approach or above above (whihc is in comments) make sure to uncomment related steps and comment others that are in AddItemType.js  */}
+
           <Route path="/details/:item" element={<Details details_item={items}/>}></Route> 
-          <Route path="/editdetails" element={<EditDetails/>}></Route> 
+          <Route path="/editdetails/:itm" element={<EditDetails item_details={items} dispatch={dispatch}/>}></Route> 
 
         </Routes>
     </div>

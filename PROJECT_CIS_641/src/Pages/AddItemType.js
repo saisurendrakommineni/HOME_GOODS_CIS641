@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Additemtype({ dispatch }) {
+
+
+function Additemtype({ addItem }) {
+// function Additemtype({ dispatch }) {
     const navigate = useNavigate();
 
     const [category, setCategory] = useState("");
@@ -25,7 +28,9 @@ function Additemtype({ dispatch }) {
         };
 
         
-        dispatch({ type: 'addItem', payload: newItem });
+        // dispatch({ type: 'addItem', payload: newItem });
+        addItem(newItem);
+
 
         navigate(`/item-types/${category}`);
     };
