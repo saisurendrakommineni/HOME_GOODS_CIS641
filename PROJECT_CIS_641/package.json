@@ -12,14 +12,14 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^3.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -39,15 +39,12 @@
       "last 1 safari version"
     ]
   },
-  
-    "rules": {
-      ".read": "auth != null",  
-      ".write": "auth != null", 
-      "items": {
-        ".read": "auth != null",  
-        ".write": "auth != null"  
-      }
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+    "items": {
+      ".read": "auth != null",
+      ".write": "auth != null"
     }
-  
-  
+  }
 }

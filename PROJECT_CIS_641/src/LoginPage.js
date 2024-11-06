@@ -1,10 +1,12 @@
+import React from 'react';
+
 import { useState } from 'react';
 import styles from './LoginPage.module.css';
 import { useNavigate } from 'react-router-dom';
 import { auth } from './firebase'; // Import the auth object
 import { signInWithEmailAndPassword } from 'firebase/auth'; // Import the Firebase auth method
 
-function Login() {
+function Login({ onLogin }) {
     const navigate = useNavigate();
     const handleCreateAccountClick = (event) => {
         event.preventDefault(); 
@@ -28,6 +30,7 @@ function Login() {
         event.preventDefault();
         try {
             await signInWithEmailAndPassword(auth, Username, Password);
+            onLogin();
             handleitemcategories(event); // Navigate to item categories on successful login
         } catch (error) {
             setError(error.message); // Capture any errors

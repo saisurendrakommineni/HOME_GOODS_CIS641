@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { database } from "../firebase";
@@ -59,6 +61,10 @@ function EditItemDetails() {
         }
     };
 
+    const handleCancelChanges=()=>{
+        navigate(`/details/${category}/${details.name}`)
+    }
+
     if (loading) return <p>Loading item details...</p>;
     if (error) return <p>{error}</p>;
 
@@ -114,7 +120,11 @@ function EditItemDetails() {
             /></div>
             <button type="button" onClick={handleSaveChanges}>
                 Save Changes
-            </button></form>
+            </button>
+            <button type="button" onClick={handleCancelChanges}>
+                Cancel Changes
+            </button>
+            </form>
         </div>
     );
 }

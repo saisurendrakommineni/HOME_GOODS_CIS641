@@ -1,11 +1,13 @@
 // installation packages
 // npm install react-router-dom
 // npm install @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons
+import React from 'react';
 
 import './LoginPage.module.css';
 import { useReducer, useState,useEffect } from "react";
 import { database } from './firebase';
 import { getDatabase, ref, set,onValue } from "firebase/database";
+import { ThemeProvider } from './ThemeContext';
 import Login from './LoginPage';
 import CreateAccount from './CreateAccount';
 import Success from './AccountCreationSuccessful';
@@ -18,7 +20,27 @@ import EditDetails from './Pages/EditItemDetails';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './Layout'; // Import the Layout component
 
+
+
 function App() {
+
+    const [isLoggedIn, setIsLoggedIn] = useState(() => {
+        return localStorage.getItem('isLoggedIn') === 'true';
+    });
+
+    // Function to set login status to true when user logs in
+    const handleLogin = () => {
+        setIsLoggedIn(true);
+        localStorage.setItem('isLoggedIn', 'true'); // Save to local storage
+    };
+
+    // Function to set login status to false when user logs out
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        localStorage.removeItem('isLoggedIn'); // Remove from local storage
+    };
+
+
     const [categories, setCategories] = useState(['Furniture', 'Decor', 'Appliances', 'Tools', 'Kitchen Ware']);
 
     const addCategory = (newCategory) => {
@@ -77,11 +99,13 @@ function App() {
   // }, []);
 
     return (
+        <ThemeProvider>
         <Router>
-            <Layout>
+            <Layout isLoggedIn={isLoggedIn} onLogout={handleLogout}>
                 <div className="App">
+               
                     <Routes>
-                        <Route path="/" element={<Login />} />
+                        <Route path="/" element={<Login onLogin={handleLogin}/>} />
                         <Route path="/create-account" element={<CreateAccount />} />
                         <Route path="/account_success" element={<Success />} />
                         <Route path="/item-categories" element={<ItemCategories categories={categories} handleDelete={handleDelete} />} />
@@ -97,6 +121,7 @@ function App() {
                 </div>
             </Layout>
         </Router>
+        </ThemeProvider>
     );
 }
 

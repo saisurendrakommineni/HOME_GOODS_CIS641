@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useState, useEffect } from 'react';
 import styles from './ItemCategories.module.css';
 import { useNavigate, useParams } from "react-router-dom";
@@ -27,6 +29,10 @@ function Itemtypes() {
         navigate("/add-item-type");
     };
 
+    const handleback=()=>{
+        navigate('/item-categories')
+    }
+
     const handleDeleteItem = async (itemId) => {
         const itemRef = ref(database, `items/${category}/${itemId}`);
         await remove(itemRef);
@@ -49,8 +55,11 @@ function Itemtypes() {
 
     return (
         <div>
+            
             <div className={styles.search_item}>
+            <button onClick={handleback}>Back</button>
                 <h1>Items in {category}</h1>
+                
                 <input 
                     type="text" 
                     placeholder="Search the item" 
@@ -58,6 +67,7 @@ function Itemtypes() {
                     onChange={(e) => setItemSearch(e.target.value)}
                 />
                 <button onClick={navigateAddItem}>Add New Item</button>
+                
             </div>
             
             <div className={styles.item_styles}>

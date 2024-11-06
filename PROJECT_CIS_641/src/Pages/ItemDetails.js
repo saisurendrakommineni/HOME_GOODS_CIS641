@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDatabase, ref, child, get } from "firebase/database";
@@ -50,6 +52,10 @@ function Details() {
         }
     };
 
+    const handleback=()=>{
+        navigate(`/item-types/${category}`)
+    }
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -60,8 +66,11 @@ function Details() {
 
     return (
         <div>
+            <div>
+            <button onClick={handleback}>Back</button>
             <h1>Item Details: {details.name}</h1>
             <button onClick={handleEditPage}>Edit Item Details</button>
+            </div>
             <div>
                 <p>Item Category: {details.category}</p>
                 <p>Item Name: {details.name}</p>
