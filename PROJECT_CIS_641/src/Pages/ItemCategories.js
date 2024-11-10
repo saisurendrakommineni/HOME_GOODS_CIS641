@@ -34,14 +34,46 @@ function Itemcategories() {
     };
 
     // Delete a category from Firebase
-    const handleDelete = (deleteItem) => {
-        const categoryRef = ref(database, `categories/${deleteItem}`);
-        remove(categoryRef).then(() => {
-            setCategories((prevCategories) =>
-                prevCategories.filter((category) => category !== deleteItem)
-            );
-        });
-    };
+    // const handleDelete = (deleteItem) => {
+    //     // const categoryRef = ref(database, `categories/${deleteItem}`);
+    //     const categoryRef = ref(database, `items/${deleteItem}`);
+    //     remove(categoryRef).then(() => {
+    //         setCategories((prevCategories) =>
+    //             prevCategories.filter((category) => category !== deleteItem)
+    //         );
+    //     });
+    // };
+    // Modify the handleDelete function to delete both category and items
+const handleDelete = (deleteItem) => {
+    // Reference to the 'categories' node to locate the key of the category to delete
+    const categoriesRef = ref(database, 'categories');
+    onValue(categoriesRef, (snapshot) => {
+        const data = snapshot.val();
+        
+        // Find the key for the category
+        const categoryKey = Object.keys(data).find(key => data[key] === deleteItem);
+
+        if (categoryKey) {
+            // Delete from 'categories' node
+            const categoryRef = ref(database, `categories/${categoryKey}`);
+            remove(categoryRef).then(() => {
+                console.log(`Deleted ${deleteItem} from categories`);
+
+                // Delete from 'items' node as well
+                const itemsRef = ref(database, `items/${deleteItem}`);
+                return remove(itemsRef);
+            }).then(() => {
+                console.log(`Deleted ${deleteItem} from items`);
+                // Update the state to remove the deleted category
+                setCategories((prevCategories) =>
+                    prevCategories.filter((category) => category !== deleteItem)
+                );
+            }).catch((error) => {
+                console.error("Error deleting category: ", error);
+            });
+        }
+    }, { onlyOnce: true });
+};
 
     const filteredCategories = categories.filter(category =>
         category.toLowerCase().includes(searchTerm.toLowerCase())
