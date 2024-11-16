@@ -7,6 +7,7 @@ import { ref, get, update } from "firebase/database";
 
 function EditItemDetails() {
     const { category, itemId } = useParams();
+    const [showConfirmation, setShowConfirmation] = useState(false); 
     const navigate = useNavigate();
     const [details, setDetails] = useState({
         name: "",
@@ -64,6 +65,13 @@ function EditItemDetails() {
     const handleCancelChanges=()=>{
         navigate(`/details/${category}/${details.name}`)
     }
+    const handleSaveClick = (event) => {
+        event.preventDefault();
+        setShowConfirmation(true); 
+    };
+    const handleCancel = () => {
+        setShowConfirmation(false); 
+    };
 
     if (loading) return <p>Loading item details...</p>;
     if (error) return <p>{error}</p>;
@@ -71,64 +79,44 @@ function EditItemDetails() {
     return (
         <div>
             <h1>Edit Item Details</h1>
-            <form>
+            <form onSubmit={handleSaveClick}>
                 <div>
-                    <label htmlFor="category_name">Category Name:</label>
-            <input
-                type="text"
-                name="name"
-                value={details.name || ""}
-                onChange={handleInputChange}
-                placeholder="Item Name"
-            /></div>
+                    <label htmlFor="category_name">Item Name:</label>
+                    <input type="text" name="name" value={details.name || ""} onChange={handleInputChange} placeholder="Item Name"/>
+                </div>
             
-            <div>
+                <div>
                     <label htmlFor="item_details">Item Details:</label>
-            <input type="text"
-                name="details"
-                value={details.details || ""}
-                onChange={handleInputChange}
-                placeholder="Item Details"
-            /></div>
+                    <input type="text" name="details" value={details.details || ""} onChange={handleInputChange} placeholder="Item Details"/>
+                </div>
 
-<div>
-<label htmlFor="item_reviews">Reviews:</label>
-            <input
-                type="text"
-                name="reviews"
-                value={details.reviews || ""}
-                onChange={handleInputChange}
-                placeholder="Item Reviews"
-            /></div>
-             <div>
-             <label htmlFor="item_rating">Rating:</label>
-            <input
-                type="number"
-                name="rating"
-                value={details.rating || ""}
-                onChange={handleInputChange}
-                placeholder="Item Rating"
-            /></div>
-              <div>
-              <label htmlFor="item_image">Image URL:</label>
-            <input
-                type="text"
-                name="image"
-                value={details.image || ""}
-                onChange={handleInputChange}
-                placeholder="Image URL"
-            /></div>
-            <button type="button" onClick={handleSaveChanges}>
-                Save Changes
-            </button>
-            <button type="button" onClick={handleCancelChanges}>
-                Cancel Changes
-            </button>
+                <div>
+                    <label htmlFor="item_reviews">Reviews:</label>
+                    <input type="text" name="reviews" value={details.reviews || ""} onChange={handleInputChange} placeholder="Item Reviews"/>
+                </div>
+                <div>
+                     <label htmlFor="item_rating">Rating:</label>
+                     <input type="number" name="rating" value={details.rating || ""} onChange={handleInputChange} placeholder="Item Rating"/>
+                </div>
+                <div>
+                    <label htmlFor="item_image">Image URL:</label>
+                    <input type="text" name="image" value={details.image || ""} onChange={handleInputChange} placeholder="Image URL"/>
+                </div>
+                    <button type="submit">Save Changes</button>
+                    <button type="button" onClick={handleCancelChanges}>Cancel Changes</button>
             </form>
+            {showConfirmation && (
+                <div>
+                    <p>Would you like to edit item Details </p>
+                    <button onClick={handleSaveChanges}>Yes</button>
+                    <button onClick={handleCancel}>No</button>
+                </div>
+            )
+            
+            }
         </div>
     );
 }
-
 export default EditItemDetails;
 
 

@@ -111,7 +111,7 @@ function App() {
                         <Route path="/item-categories" element={<ItemCategories categories={categories} handleDelete={handleDelete} />} />
                         <Route path="/add-item-categories" element={<AddCategory addCategory={addCategory} />} />
                         <Route path="/item-types/:category" element={<ItemTypes items={items} />} /> 
-                        <Route path="/add-item-type" element={<AddItemType addItem={(newItem) => dispatch({ type: 'addItem', payload: newItem })} />} />
+                        <Route path="/add-item-type/:categorys" element={<AddItemType addItem={(newItem) => dispatch({ type: 'addItem', payload: newItem })} />} />
                         <Route path="/details/:category/:item" element={<Details items={items} />} /> 
                         {/* <Route path="/editdetails/:category/:item" element={<EditDetails items={items} dispatch={dispatch} />} />  */}
                         <Route path="/editdetails/:category/:itemId" element={<EditDetails />} />
@@ -128,6 +128,105 @@ function App() {
 export default App;
 
 
+// import React, { useState, useReducer } from 'react';
+// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// import { database } from './firebase'; // Firebase database instance
+// import { getDatabase, ref, set, push,remove } from 'firebase/database';
+// import { ThemeProvider } from './ThemeContext';
+// import Layout from './Layout';
+// import Login from './LoginPage';
+// import CreateAccount from './CreateAccount';
+// import Success from './AccountCreationSuccessful';
+// import ItemCategories from './Pages/ItemCategories';
+// import AddCategory from './Pages/AddItemCategory';
+// import ItemTypes from './Pages/ItemTypes';
+// import AddItemType from './Pages/AddItemType';
+// import Details from './Pages/ItemDetails';
+// import EditDetails from './Pages/EditItemDetails';
+
+// function App() {
+//     const [isLoggedIn, setIsLoggedIn] = useState(() => {
+//         return localStorage.getItem('isLoggedIn') === 'true';
+//     });
+
+//     // Handle login and logout status
+//     const handleLogin = () => {
+//         setIsLoggedIn(true);
+//         localStorage.setItem('isLoggedIn', 'true');
+//     };
+//     const handleLogout = () => {
+//         setIsLoggedIn(false);
+//         localStorage.removeItem('isLoggedIn');
+//     };
+
+//     // Categories with image URLs
+//     const [categories, setCategories] = useState([
+//         { name: 'Furniture', image: '/Assets/download.jpg' },
+//         { name: 'Decor', image: '/Assets/download.jpg' },
+//         { name: 'Appliances', image: '/Assets/download.jpg' },
+//         { name: 'Tools', image: '/Assets/download.jpg' },
+//         { name: 'Kitchen Ware', image: '/Assets/download.jpg' },
+//     ]);
+
+//     // Function to add a category with an image
+//     const addCategory = (newCategory, imageUrl) => {
+//         setCategories(prevCategories => [...prevCategories, { name: newCategory, image: imageUrl }]);
+//         // Save the category with image in Firebase
+//         const newCategoryRef = push(ref(database, 'categories'));
+//         set(newCategoryRef, { name: newCategory, image: imageUrl });
+//     };
+
+//     // Function to delete a category
+//     const handleDelete = (deleteItem) => {
+//         setCategories(prevCategories => prevCategories.filter(category => category.name !== deleteItem));
+//         const categoryRef = ref(database, `categories/${deleteItem}`);
+//         remove(categoryRef);
+//     };
+
+//     const itemTypes = [
+//         { id: 1, category: "Furniture", name: "Sofa", details: "Blue color", reviews: 100, rating: 5, image: "/Assets/download.jpg" },
+//         { id: 2, category: "Decor", name: "Chair", details: "Small", reviews: 700, rating: 3, image: "/Assets/chair.jpg" },
+//         { id: 3, category: "Appliances", name: "Electric", details: "Huge", reviews: 1200, rating: 4.5 },
+//         { id: 4, category: "Tools", name: "Screw Driver", details: "100", reviews: 900, rating: 3.5 },
+//         { id: 5, category: "Kitchen Ware", name: "Spoon", details: "900", reviews: 70, rating: 5 },
+//         { id: 6, category: "Furniture", name: "Bed", details: "9*9", reviews: 7000, rating: 4.9 },
+//     ];
+
+//     const reducer = (types, action) => {
+//         switch (action.type) {
+//             case 'addItem':
+//                 return [...types, action.payload];
+//             case 'editItem':
+//                 return types.map(item => item.id === action.payload.id ? { ...action.payload } : item);
+//             default:
+//                 return types;
+//         }
+//     };
+
+//     const [items, dispatch] = useReducer(reducer, itemTypes);
+
+//     return (
+//         <ThemeProvider>
+//             <Router>
+//                 <Layout isLoggedIn={isLoggedIn} onLogout={handleLogout}>
+//                     <Routes>
+//                         <Route path="/" element={<Login onLogin={handleLogin} />} />
+//                         <Route path="/create-account" element={<CreateAccount />} />
+//                         <Route path="/account_success" element={<Success />} />
+//                         <Route path="/item-categories" element={<ItemCategories categories={categories} handleDelete={handleDelete} />} />
+//                         <Route path="/add-item-categories" element={<AddCategory addCategory={addCategory} />} />
+//                         <Route path="/item-types/:category" element={<ItemTypes items={items} />} />
+//                         <Route path="/add-item-type/:categorys" element={<AddItemType addItem={(newItem) => dispatch({ type: 'addItem', payload: newItem })} />} />
+//                         <Route path="/details/:category/:item" element={<Details items={items} />} />
+//                         <Route path="/editdetails/:category/:itemId" element={<EditDetails />} />
+//                     </Routes>
+//                 </Layout>
+//             </Router>
+//         </ThemeProvider>
+//     );
+// }
+
+// export default App;
 
 
 

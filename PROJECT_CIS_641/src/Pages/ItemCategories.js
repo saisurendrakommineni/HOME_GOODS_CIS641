@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from './ItemCategories.module.css';
@@ -83,12 +82,7 @@ const handleDelete = (deleteItem) => {
         <div>
             <div className={styles.search_item}>
                 <h1>Item Categories Page</h1>
-                <input 
-                    type="text" 
-                    placeholder="Search The Item" 
-                    className={styles.searchBar} 
-                    onChange={(event) => setSearchTerm(event.target.value)}
-                />
+                <input type="text" placeholder="Search The Item" className={styles.searchBar} onChange={(event) => setSearchTerm(event.target.value)}/>
                 <button onClick={handleAddCategory}>Add New Category</button>
             </div>
 
@@ -100,11 +94,7 @@ const handleDelete = (deleteItem) => {
                         </div>
 
                         <div>
-                            <FontAwesomeIcon 
-                                icon={faTrash} 
-                                className={styles.delete_icon} 
-                                onClick={() => handleDelete(name)}
-                            />
+                            <FontAwesomeIcon  icon={faTrash} className={styles.delete_icon} onClick={() => handleDelete(name)}/>
                         </div>
                     </div>
                 ))}
@@ -114,6 +104,58 @@ const handleDelete = (deleteItem) => {
 }
 
 export default Itemcategories;
+
+//ABOVE ONE IS ORIGINAL CODE
+
+// import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import styles from './ItemCategories.module.css';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
+// function ItemCategories({ categories, handleDelete }) {
+//     const navigate = useNavigate();
+//     const [searchTerm, setSearchTerm] = useState('');
+
+//     // Navigate to item types in the selected category
+//     const handleItemTypesNavigation = (categoryName) => {
+//         navigate(`/item-types/${categoryName}`);
+//     };
+
+//     // Filter categories based on the search term
+//     const filteredCategories = categories.filter(category =>
+//         category.name.toLowerCase().includes(searchTerm.toLowerCase())
+//     );
+
+//     return (
+//         <div>
+//             <div className={styles.search_item}>
+//                 <h1>Item Categories Page</h1>
+//                 <input
+//                     type="text"
+//                     placeholder="Search The Item"
+//                     className={styles.searchBar}
+//                     onChange={(event) => setSearchTerm(event.target.value)}
+//                 />
+//                 <button onClick={() => navigate("/add-item-categories")}>Add New Category</button>
+//             </div>
+
+//             <div className={styles.item_styles}>
+//                 {filteredCategories.map((category) => (
+//                     <div key={category.name} className={styles.categoryItem}>
+//                         <img src={category.image} alt={category.name} className={styles.categoryImage} />
+//                         <h1 onClick={() => handleItemTypesNavigation(category.name)}>{category.name}</h1>
+//                         <FontAwesomeIcon icon={faTrash} className={styles.delete_icon} onClick={() => handleDelete(category.name)} />
+//                     </div>
+//                 ))}
+//             </div>
+//         </div>
+//     );
+// }
+
+// export default ItemCategories;
+
+
 
 
 

@@ -26,7 +26,8 @@ function Itemtypes() {
     }, [category]);
 
     const navigateAddItem = () => {
-        navigate("/add-item-type");
+        // navigate("/add-item-type");
+        navigate(`/add-item-type/${category}`);
     };
 
     const handleback=()=>{
