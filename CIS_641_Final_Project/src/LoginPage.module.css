@@ -1,0 +1,83 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.App {
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFEBCD; 
+}
+
+/* Style the form container */
+.style1 {
+    background-color: rgba(177, 224, 36, 0.424); 
+    padding: 20px;
+    /* display: flex;  */
+    /* flex-direction: column;  */
+    /* justify-content: center; 
+    align-items: center; */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+.style1 div{
+    margin:10px;
+}
+.btn_style{
+    display: flex;
+    justify-content: center;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+button{
+    cursor: pointer;
+   
+}
+.input_group {
+    display: flex; /*we already in row so it doenst make any great changes just moved labels*/
+    
+}
+.input_group label {
+    margin-right: 50px;
+    min-width: 200px; 
+}
+
+sup {
+    color: red;
+    top: -2px;
+    font-size: 95%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  /* .FieldError {
+    position: absolute;
+    bottom: -6px;
+    color: red;
+    font-size: 12px;
+  } */
+
+  .FieldError {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  input:focus {
+    border-color: #4d90fe; /* Optional focus style */
+  }
+  
+  input:invalid {
+    border-color: red;
+  }
+  

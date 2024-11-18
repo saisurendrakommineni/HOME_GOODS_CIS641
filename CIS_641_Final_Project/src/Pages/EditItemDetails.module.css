@@ -1,0 +1,120 @@
+/* General form container styling */
+.form_container {
+    
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+/* Input field styling */
+.form_input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Styling for the buttons */
+.submit_button, .cancel_button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+/* Specific styles for each button */
+.submit_button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.submit_button:hover {
+    background-color: #45a049;
+}
+
+.cancel_button {
+    background-color: #f44336;
+    color: white;
+}
+
+.cancel_button:hover {
+    background-color: #da190b;
+}
+
+/* Back button styling */
+.search_item button {
+    padding: 10px 20px;
+    background-color: #ddd;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.search_item button:hover {
+    background-color: #bbb;
+}
+
+/* Confirmation modal styling */
+.confirmation_modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1000;
+    text-align: center;
+}
+
+/* Confirmation buttons */
+.confirm_button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.confirm_button:hover {
+    background-color: #45a049;
+}
+
+/* Close modal button */
+.confirmation_modal button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #f44336;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.confirmation_modal button:hover {
+    background-color: #da190b;
+}
+
+/* Loading and error messages styling */
+p {
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+}
